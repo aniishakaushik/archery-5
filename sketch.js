@@ -111,8 +111,17 @@ function keyReleased() {
 function showArrows(index, arrows) {
   arrows[index].display();
 
+ if (
+    arrows[index].body.position.x > width ||
+    arrows[index].body.position.y > height
+  ) {
+    if (!arrows[index].isRemoved) {
+      arrows[index].remove(index, arrows);
+    } else {
+      arrows[index].trajectory = [];
+    }
+  }
 }
-
 function handleComputerArcher() {
   if (!computerArcher.collapse && !playerArcher.collapse) {
     setTimeout(() => {
